@@ -1,0 +1,52 @@
+---
+title: Settler Integration
+description: Building and deploying Chainlink CRE workflows.
+---
+
+## Collaborative On-Chain Settlement
+
+Obolus Network's **Confidential Settler** is an open, decentralized network of **Chainlink CRE** workers that execute private transaction intents. 
+
+### Why Integrate?
+
+Integrating as a Settler allows you to provide high-performance clearing services to our institutional partners and capture a share of the protocol's execution fees.
+
+### Key Components
+
+- **Runtime:** [Bun](https://bun.sh/)
+- **Infrastructure:** **Chainlink CRE** (SGX Enclave)
+- **Library:** `obolus-cre-toolkit` (ECIES decryption, EIP-712 verification)
+
+---
+
+## Settler Workflows
+
+A typical Settler implements three primary workflows:
+
+- `execute-deposits/`: Monitors the **Obolus Server** for encrypted deposit intents and executes a `RWAVault.deposit(...)` transaction.
+- `execute-withdrawals/`: Processes encrypted withdrawal intents and executes `RWAVault.withdraw(...)`.
+- `check-positions/`: Fetches real-time price feeds, calculates NAV across user portfolios, and triggers stop-loss or liquidation logic based on encrypted threshold triggers.
+
+---
+
+### Deployment Guide
+
+1.  **Configure Environment:** Fill in `.env` with your `CRE_PRIVATE_KEY` and `VAULT_OPERATOR_KEY`.
+2.  **Install Dependencies:** Run `bun install` in each workflow directory (`execute-deposits/`, etc.).
+3.  **Local Simulation:** Use the `./simulate.sh` script to test the settlement logic against a local Ganache or Anvil fork.
+4.  **CRE Workflow Deployment:** 
+    ```bash
+    cre workflow deploy ./execute-deposits --target=production-settings
+    ```
+
+---
+
+### Security Best Practices
+
+- **Strict TEE isolation:** Ensure that no plaintext keys or transaction data are ever logged outside of the SGX enclave.
+- **Nonce Management:** Properly handle on-chain transaction nonces to prevent collisions across multiple workers.
+- **Oracle Verification:** Always cross-reference user-submitted price data with the **Chainlink Data Streams** inside the TEE.
+
+---
+
+For more on our cryptography, visit the **[ECIES Encryption](/docs/architecture/encryption)** section.

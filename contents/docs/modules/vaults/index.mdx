@@ -1,0 +1,42 @@
+---
+title: Smart Vaults
+description: High-yield RWA-backed strategies with private participation.
+---
+
+## Institutional Grade RWA Vaults
+
+Obolus Network's **Smart Vaults** are the primary entry point for users to deploy capital into yield-generating asset classes. These vaults bridge the gap between liquid on-chain positions and high-productivity off-chain RWAs.
+
+### Key Vault Metrics
+
+- **Total Value Locked (TVL):** The cumulative value of all assets deposited into the vault across all users.
+- **Base APY:** The target annualized yield for the vault's underlying strategy.
+- **Yield Boosting:** Additional rewards distributed to long-term stakers and governance participants.
+- **Private Layer Participation:** Users can participate in any vault while their individual contribution remains cryptographically hidden.
+
+### Supported Asset Classes
+
+1.  **Equity-Linked Vaults** (`TSLAon`, `NVDAon`, `ARKKon`) - Synthetic exposure to US Equities and ETFs.
+2.  **Credit-Based Vaults** - Yield generated through institutional credit lending and trade finance.
+3.  **Real Estate Vaults** - Exposure to rental yields and property appreciation through tokenized deeds.
+
+### Vault Mechanics
+
+- **Deposit:** User deposits stablecoins (oUSD) or specific RWA tokens into the Smart Vault.
+- **Rebalance:** The vault periodically rebalances its underlying strategy to maintain target returns.
+- **Withdrawal:** Users can exit their position at any time, with the final value settled through the **Settler's CRE**.
+
+---
+
+### Comparison with Traditional Yield Aggregators
+
+| Feature | TradFi / Other DeFi | Obolus Smart Vaults |
+| :--- | :--- | :--- |
+| **Asset Underlyings** | Crypto Blue Chips | **Tokenized RWAs** |
+| **Privacy Guarantee** | None (Public) | **Full Privacy Stack** |
+| **Settlement Time** | T+2 (TradFi) | **T+0 (Obolus)** |
+| **Management** | Centralized / DAO | **TEE-Enforced Clearing** |
+
+---
+
+See our **[Dumb Store Model](/docs/architecture/dumb-store)** for details on how we protect your vault positions.

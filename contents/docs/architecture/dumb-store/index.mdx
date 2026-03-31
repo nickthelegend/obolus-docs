@@ -1,0 +1,41 @@
+---
+title: Dumb Store Model
+description: How we maintain backend blindness with encrypted metadata.
+---
+
+## The "Dumb Store" Architecture
+
+In traditional DeFi and Web2.5 protocols, the backend server acts as the **"Brain"** of the application, holding plaintext valuations, net worth metrics, and transaction history. This approach creates a single point of failure for both security and privacy.
+
+Obolus Network replaces the "Brain" with a **"Dumb Store"**.
+
+### Core Philosophy
+
+The Obolus Server is explicitly designed to be **blind** to the data it stores. It acts only as a high-availability coordination layer between the user's browser (where data is plaintext) and the Chainlink CRE (where it becomes plaintext again).
+
+### Key Characteristics
+
+- **Blind Storage:** The `obolus-server` stores user "Intents" (e.g., deposits, withdrawals, rebalances) as ECIES-encrypted blobs.
+- **Zero Decryption Capability:** The server does not hold the private keys required to decrypt user data. The keys live only in the **Settler's TEE**.
+- **Anonymous Metadata:** Even when fetching prices or syncing vault metrics, the server uses blinded IDs to ensure that a server-level compromise doesn't reveal user portfolios.
+
+### Implementation Stack
+
+- **Framework:** [Hono](https://hono.dev/) with Bun runtime.
+- **Database:** MongoDB (Blinded metadata storage).
+- **Security:** Client-side signing of all data requests via EIP-712.
+
+---
+
+### Comparison with Traditional Servers
+
+| Feature | Traditional Server | Obolus "Dumb Store" |
+| :--- | :--- | :--- |
+| **Data Visibility** | Full Plaintext | **ECIES Encrypted** |
+| **Key Management** | Server-side Keys | **Distributed TEE Keys** |
+| **Privacy Risk** | High (Server Breach) | **None** (Blind Payloads) |
+| **Performance** | Standard | High (Low computational overhead) |
+
+---
+
+For deeper details on how our clients seal data, see **[ECIES Encryption](/docs/architecture/encryption)**.

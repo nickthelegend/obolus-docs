@@ -1,0 +1,42 @@
+---
+title: Lending Market
+description: Use your yield-generating RWA assets as high-LTV collateral.
+---
+
+## Confidential Lending & Borrowing
+
+The Obolus **Lending Market** allows users to unlock liquidity from their **Smart Vault** positions without exiting their yield-generating RWA holdings. It bridges the gap between long-term investment and short-term capital needs.
+
+### Key Lending Features
+
+- **Collateral Options:** Use any supported RWA token (e.g., `NVDAon`, `ARKKon`) or vault receipt as collateral.
+- **Credit Lines:** Borrow the protocol's stablecoin (`oUSD`) at competitive interest rates.
+- **Private Loan Management:** Your collateral ratios, credit limits, and current debt are cryptographically shielded from the server.
+- **Dynamic LTV:** Market-leading **Loan-to-Value (LTV)** ratios, optimized for low-volatility institutional RWAs.
+
+### The Lending Lifecycle
+
+1.  **Seal Collateral:** The user chooses to "stake" 50 `TSLAon` tokens as collateral.
+2.  **Borrow Intent:** The user requests a $3,000 `oUSD` loan.
+3.  **Privacy Encapsulation:** Both the collateral value and the requested loan amount are encrypted via **ECIES**.
+4.  **CRE Execution:** The **Settler's TEE** verifies the LTV compliance and executes the on-chain lending contract to mint the `oUSD`.
+
+---
+
+- **LTV (Loan-To-Value):** Up to 80% for certain low-volatility RWA-backed vaults.
+- **Liquidation:** If the collateral value (as reported by the **Price Oracle**) falls below the maintenance threshold, a liquidation event is triggered via the **Settler**.
+
+---
+
+### Comparison with Traditional Lending
+
+| Feature | TradFi Bank | Aave / Radiant | Obolus Lending |
+| :--- | :--- | :--- | :--- |
+| **Asset Type** | Real Estate / Stocks | Crypto Assets | **Tokenized RWAs** |
+| **Privacy** | Full Visibility (Bank) | None (Public Chain) | **Blinded (TEE)** |
+| **Eligibility** | KYC / Credit Score | Permissionless | **Permissionless** |
+| **Settlement** | Multiple Days | Instant (Public) | **T+0 (Private)** |
+
+---
+
+For automated rebalancing and debt management, see our **[Smart Vaults](/docs/modules/vaults)** guide.

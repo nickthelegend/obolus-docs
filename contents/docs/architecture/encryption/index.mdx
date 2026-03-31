@@ -1,0 +1,42 @@
+---
+title: ECIES Encryption
+description: Our cryptographic primitives for client-side sealing.
+---
+
+## Cryptographic Sealing
+
+Obolus Network uses **ECIES (Elliptic Curve Integrated Encryption Scheme)** on the **secp256k1** curve to ensure that user transaction intents are cryptographically sealed before leaving the browser.
+
+### Key Pair Generation
+
+- **Settler Public Key:** A dedicated secp256k1 public key derived from the Settler's TEE-enforced private key. This key is used by all Obolus clients to encrypt data.
+- **Settler Private Key:** The private key used for decryption. This key **NEVER** exists in plaintext. It is generated and stored inside the **Chainlink CRE (SGX Enclave)**.
+
+### Encryption Workflow
+
+1.  **Ephemeral Key Generation:** For every transaction, the client generates a one-time ephemeral private/public key pair (k, K).
+2.  **Shared Secret Derivation:** The client uses the ephemeral key and the Settler's public key to derive a shared secret (S = k * P_public).
+3.  **Symmetric Key Derivation:** To ensure maximum security, the client uses a **KDF (Key Derivation Function)** like PBKDF2 or HKDF to derive an AES-256-GCM key from the shared secret.
+4.  **Payload Sealing:** The transaction data (e.g., amount: 10000, symbol: 'TSLAon') is encrypted using **AES-GCM-256** with the derived key.
+5.  **Payload Composition:** The client sends the final ECIES payload to the server:
+    - `ephemeralPublicKey`
+    - `iv` (Initialization Vector)
+    - `ciphertext`
+    - `mac` (Authentication Tag)
+
+### Why ECIES on secp256k1?
+
+- **Ethereum Native:** secp256k1 is the same curve used by Ethereum and BNB Chain for wallet addresses and signatures. This allows for seamless integration with browser extensions like MetaMask.
+- **Asymmetric Security:** Users can safely encrypt data for the Settler without the Settler ever sharing its private key.
+- **Hardware Acceleration:** secp256k1 operations are highly optimized on modern CPUs and inside TEEs.
+
+---
+
+### Security Properties
+
+- **Forward Secrecy:** Since every transaction uses a new ephemeral key, a compromise of one transaction's shared secret does not affect any other transaction.
+- **Integrity (GCM):** The use of AES-GCM ensures that any attempt to tamper with the ciphertext will be detected by the Settler.
+
+---
+
+For technical implementation details, see our **[GitHub Repository](https://github.com/obolus-network)**.

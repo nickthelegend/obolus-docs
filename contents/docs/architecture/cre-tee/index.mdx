@@ -1,0 +1,43 @@
+---
+title: Chainlink CRE & TEE
+description: Our trustless execution layer for decentralized settlement.
+---
+
+## Decentralized Private Settlement
+
+Obolus Network relies on **Chainlink Confidential Runtime Environments (CRE)** to bridge the gap between private transaction intents and public on-chain settlement. 
+
+### What is a TEE?
+
+A **Trusted Execution Environment (TEE)** (e.g., **Intel SGX**) provides a hardware-enforced "secure enclave" inside a server's processor. Code and data inside the enclave are:
+1.  **Isolated** - The host machine's OS or even its root user cannot access the memory inside the enclave.
+2.  **Attestable** - Users can cryptographically verify that the *exact* code they expect is running in the enclave.
+
+### Obolus CRE Workers
+
+Our **Settler** is a fleet of CRE workers that perform the following loop:
+
+- **1. Event Fetching:** The worker polls the `obolus-server` for new encrypted Intents.
+- **2. Decryption (Inside SGX):** The worker uses the **CRE Private Key** (which only exists inside the TEE) to decrypt the user's intent.
+- **3. Policy Validation:** The worker checks that the user's deposit or withdrawal complies with the protocol's risk parameters.
+- **4. On-Chain Execution:** The worker signs and broadcasts the settlement transaction (e.g. `RWAVault.deposit(...)`) to the BNB Chain.
+
+### Security Guarantees
+
+- **Secrecy:** No one, not even the Obolus team or the Chainlink DON node operators, ever sees the plaintext asset amounts.
+- **Tamper-Resistance:** Since the code running in the TEE is immutable and attested, the execution logic cannot be changed without the node operator's knowledge.
+- **Scalability:** Multiple CRE workers can run in parallel, providing high-throughput T+0 settlement for large-scale institutional assets.
+
+---
+
+### Comparison with Traditional Methods
+
+| Method | Security | Privacy |
+| :--- | :--- | :--- |
+| **Traditional Backend** | Low (Server Hack) | None (Full Visibility) |
+| **Smart Contract (EVM)** | High (Public Verification) | **None** (Public Data) |
+| **Obolus CRE (TEE)** | **Extremely High** | **Full (Blinded Computation)** |
+
+---
+
+For more on the settlement workflows, check the **[Settler Integration](/docs/developers/settler)** guide.

@@ -1,0 +1,43 @@
+---
+title: AMM & Swap
+description: Decentralized exchange (DEX) for RWA tokens and oUSD.
+---
+
+## Hybrid AMM Architecture
+
+Obolus Network's **AMM (Automated Market Maker)** is a high-performance exchange layer built for the **BNB Chain**. It provides a 24/7 liquid market for our tokenized RWA tokens, allowing for instant entry and exit of the protocol.
+
+### Key Swap Features
+
+- **Private Swaps:** Users can swap RWA tokens (e.g., `TSLAon`) to the protocol's stablecoin (`oUSD`) with minimal friction.
+- **Liquidity Provision:** Earn trading fees by providing liquidity to any of the protocol's core pairs (e.g., `TSLAon/oUSD`).
+- **Oracle-Guided Pricing:** Our AMM integrates real-world asset price feeds (via **Chainlink Data Streams**) to ensure that on-chain liquidity aligns with global market prices.
+- **Low-Fee Execution:** Optimized for high-throughput institutional trading with minimal slippage.
+
+### Why a Hybrid AMM?
+
+Wait! Obolus uses a **vAMM (Virtual AMM)** or a standard **x*y=k** swap?
+Our `swap-widget.tsx` matches standard DEX patterns but with a "Privacy Layer" that encrypts the actual trade size for the server.
+
+### Swap Workflow (The Obolus Way)
+
+1.  **Price Check:** Fetch the latest quote from the **Dumb Store's** pricing endpoint.
+2.  **Trade Setup:** Enter the amount (e.g., 50 `TSLAon`).
+3.  **Client-Side Enveloping:** The 50 `TSLAon` amount is encrypted into an **ECIES Intent**.
+4.  **Submission:** Send the encrypted intent to the server.
+5.  **Settlement:** The **CRE Settler** executes the swap on-chain using a specialized **Settlement Smart Contract**.
+
+---
+
+### Comparison with Standard DEXs
+
+| Feature | Uniswap / PancakeSwap | Obolus Hybrid AMM |
+| :--- | :--- | :--- |
+| **Asset Type** | Crypto Native | **Tokenized RWAs** |
+| **Privacy Mode** | Fully Public | **Blinded Trade Intent** |
+| **Slippage Model** | Standard x*y=k | **Oracle-Enhanced** |
+| **Clearing** | Instant (Public) | **T+0 (Enclave-Verified)** |
+
+---
+
+Want to build a custom trading bot for Obolus? See the **[API Reference](/docs/developers/api)**.

@@ -1,0 +1,61 @@
+---
+title: API Reference
+description: Integrate with the Obolus Server (Dumb Store) for programmatic access.
+---
+
+## Obolus Backend API (Hono)
+
+The **Obolus Server** provides an institutional-grade API for our frontends, institutional clients, and rebalancing bots. 
+
+### API Base URL
+
+`http://api.obolus.network/api/v1`
+
+---
+
+## Authentication & Privacy
+
+All non-public endpoints require a user signature as proof of identity. We use **EIP-712** to ensure that the server doesn't hold or see the users' private keys.
+
+- **Header:** `x-obolus-signature: &lt;eip712_signature&gt;`
+- **Header:** `x-obolus-wallet: &lt;wallet_address&gt;`
+
+---
+
+## Core Endpoints
+
+### 1. Market Data
+- `GET /prices` - Fetch real-time RWA and crypto prices (cached via Redis).
+- `GET /prices/:symbol` - Detailed price history for a specific token.
+- `GET /vaults` - Summary of all active Smart Vaults and their base APYs.
+
+### 2. User Positions (Encrypted)
+- `GET /positions/:walletAddress` - Fetch the user's current ECIES-encrypted positions.
+- `POST /positions/update` - Submit a new encrypted position intent to the **Dumb Store**.
+
+### 3. Settlement Intents
+- `POST /intents/deposit` - Submit an encrypted `DepositIntent` payload.
+- `POST /intents/withdraw` - Submit an encrypted `WithdrawalIntent` payload.
+- `GET /intents/:intentId/status` - Check the on-chain settlement status of an intent.
+
+---
+
+### Response Format
+
+Obolus uses a standardized JSON response format:
+
+```json
+{
+  "status": "success",
+  "data": {},
+  "metadata": {
+    "latency_ms": 12,
+    "daemon_status": "READY",
+    "privacy_stack": "ECIES_ACTIVE"
+  }
+}
+```
+
+---
+
+For settlement automation, visit the **[Settler Integration](/docs/developers/settler)** guide.

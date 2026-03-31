@@ -1,0 +1,27 @@
+---
+title: Welcome to Obolus Network
+description: The Privacy-Preserving RWA Yield and Credit Layer.
+---
+
+## What is Obolus Network?
+
+Obolus Network is an institutional-grade RWA (Real World Asset) yield and credit platform built on the **BNB Chain**. We provide a "Privacy-First" approach to DeFi, where sensitive user metadata and portfolio valuations are cryptographically shielded from all parties, including the protocol operators.
+
+### The Obolus Privacy Stack
+
+Obolus implements a unique **3-Layer Privacy-Preserving Stack**:
+
+1.  **Layer 1: Client-Side ECIES Encryption** - User intents (deposits/withdrawals) are sealed on the client before being sent to the server.
+2.  **Layer 2: Blinded Server (Dumb Store)** - The backend server stores only encrypted payloads and provides them to the decentralized settlement layer on-demand.
+3.  **Layer 3: TEE-Enforced Clearing** - Settlement calculations happen inside **Chainlink Confidential Runtime Environments (CRE)** using Intel SGX, ensuring that plaintext valuations only exist within secure hardware.
+
+### Key Features
+
+- **Blinded Yield Vaults:** Deploy capital into RWA-backed strategies without revealing your net worth.
+- **Privacy-Preserving Lending:** Borrow against yield-generating assets with shielded collateral ratios.
+- **T+0 Settlement:** Immediate clearing and settlement via decentralized CRE workers.
+- **Institutional Compliance:** Multi-layered security designed for high-throughput institutional use cases.
+
+---
+
+Explore the sidebar to dive deep into our **Dumb Store Architecture** and **CRE settlement** workflows.

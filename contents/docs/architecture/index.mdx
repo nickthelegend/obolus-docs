@@ -1,0 +1,32 @@
+---
+title: Protocol Architecture
+description: Understanding the Obolus 3-Layer Privacy-Preserving Stack.
+---
+
+## Technical Overview
+
+The Obolus Network is built on a "Privacy-First" architecture that ensures sensitive data never exists in plaintext outside of a **Trusted Execution Environment (TEE)**. Our stack bridges the transparency of BNB Chain with the privacy requirements of modern finance.
+
+### High-Level Architecture
+
+The protocol is split into three main components:
+
+1.  **Frontend (Obolus Network V2):** Handles user interactions, asset management, and **client-side encryption**.
+2.  **Dumb Store (Obolus Server):** A high-performance Hono backend that stores encrypted "Intents" without any ability to decrypt them.
+3.  **Confidential Settler (Obolus Settler):** A fleet of **Chainlink CRE** workers that fetch encrypted intents, decrypt them inside a TEE, and execute on-chain settlement.
+
+### Lifecycle of a Protected Transaction
+
+- **Step 1: User Intent** - The user chooses a vault deposit of $10,000 TSLA.
+- **Step 2: Client-Side Seal** - The $10,000 value is encrypted using the Settler's ECIES public key.
+- **Step 3: Storage** - The server stores the encrypted intent payload.
+- **Step 4: CRE Fetch** - The worker fetches the payload from the server.
+- **Step 5: TEE Execution** - The worker decrypts the payload inside the TEE and verifies the amount against on-chain liquidity.
+- **Step 6: Settlement** - The worker submits the transaction to the BNB Chain to finalize the deposit.
+
+---
+
+### In This Section
+- **[Dumb Store Model](/docs/architecture/dumb-store)**: How we maintain data blindness.
+- **[Chainlink CRE & TEE](/docs/architecture/cre-tee)**: The trustless execution environment.
+- **[ECIES Encryption](/docs/architecture/encryption)**: Our cryptographic primitives.
