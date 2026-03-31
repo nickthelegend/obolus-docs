@@ -1,0 +1,50 @@
+---
+title: Smart Contract Deployments
+description: List of deployed Obolus Network contracts and their roles.
+---
+
+## Overview
+
+The Obolus Protocol consists of a suite of smart contracts on the **BNB Smart Chain (BSC) Testnet**. These contracts manage the minting of stablecoins, the trading of tokenized assets, and the confidential lending markets. 
+
+All interaction intents are **sealed on-client** and only the **settlement outcomes** are visible on-chain, ensuring high privacy for institutional participants.
+
+## Core Protocol Contracts
+
+The table below lists the core protocol contracts. You can click the links to verify the source code and transactions on the BscScan Explorer.
+
+| Contract | Function | Address | Explorer Link |
+| :--- | :--- | :--- | :--- |
+| **Obolus Vault** | Primary entry point for deposits & withdrawals. | `0x772C9513fFcffaed224048b3e22AcF9E58854b73` | [BscScan](https://testnet.bscscan.com/address/0x772C9513fFcffaed224048b3e22AcF9E58854b73) |
+| **oUSD (Stablecoin)** | The protocol's internal stablecoin, minted against RWAs. | `0x73b44a1C5e2c981594BA5dbb9d84edc905202f82` | [BscScan](https://testnet.bscscan.com/address/0x73b44a1C5e2c981594BA5dbb9d84edc905202f82) |
+| **Obolus AMM** | Hybrid AMM for confidential RWA swapping. | `0x01E604F1D21Fc690A6fD9c2f7a27A5dA572cD8e4` | [BscScan](https://testnet.bscscan.com/address/0x01E604F1D21Fc690A6fD9c2f7a27A5dA572cD8e4) |
+| **Price Oracle** | Verified pricing for tokenized equities via CRE workers. | `0xb0ab8015Ce10593eE9a26E78B0BeDBc21330ba23` | [BscScan](https://testnet.bscscan.com/address/0xb0ab8015Ce10593eE9a26E78B0BeDBc21330ba23) |
+
+## Tokenized Equity Contracts (Synthetics)
+
+These contracts represent the synthetic versions of real-world stocks and ETFs.
+
+| Asset | Symbol | Contract Address |
+| :--- | :--- | :--- |
+| **Tesla** | TSLAx | `0x2B05DC386bbe679fD22eDE500b52B858B86B3778` |
+| **Apple** | AAPLx | `0x11ba0F051f6859a8BBb98cCa14B40F280FcB96F0` |
+| **Nvidia** | NVDAon | `0x235a45B9d8A51c1D4aCFd2d4EaA9bA2B263E0c78` |
+| **Google** | GOOGLx | `0xa9308C9938C9E09AeD4211E777696feB1Ff0c77B` |
+| **S&P 500 ETF** | SPYx | `0x39E2D41eB56188259137a8931a0Ce04fFEF6413f` |
+
+## Lending Pool Contracts
+
+Each asset has a dedicated confidential lending pool:
+
+| Pool | Asset | Contract Address |
+| :--- | :--- | :--- |
+| **TSLAx Pool** | TSLAx | `0x0e38d8069C194d6b12C6B6002f9286C91a0BcE91` |
+| **AAPLx Pool** | AAPLx | `0x35d702B460150c09ae181A2129eab70428Dc8889` |
+| **NVDAon Pool** | NVDAon | `0x3cfc330FB24A318fc619Ee8aE80DD3c9f92Dc65e` |
+| **SPYx Pool** | SPYx | `0x383FF0528b2c1Db2C5D439E5E64157851189ADC4` |
+
+---
+
+### How to use these addresses
+- **Manual Verification:** You can search these addresses on the BNB Testnet Explorer to see the code and audit the protocol's holdings.
+- **Wallet Integration:** Add the Token addresses (TSLAx, etc.) to MetaMask to see your balances once they are cleared by the protocol.

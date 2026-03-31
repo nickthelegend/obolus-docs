@@ -3,25 +3,39 @@ title: Welcome to Obolus Network
 description: The Privacy-Preserving RWA Yield and Credit Layer.
 ---
 
-## What is Obolus Network?
+## Our Vision
 
-Obolus Network is an institutional-grade RWA (Real World Asset) yield and credit platform built on the **BNB Chain**. We provide a "Privacy-First" approach to DeFi, where sensitive user metadata and portfolio valuations are cryptographically shielded from all parties, including the protocol operators.
+At **Obolus Network**, we believe the future of finance is open, decentralized, and **private**. 
 
-### The Obolus Privacy Stack
+While public blockchains offer transparency and security, they fail to protect the most sensitive financial metadata—intent, asset valuation, and portfolio composition. This "On-Chain Exposure Gap" prevents trillions of dollars in institutional Real World Assets (RWAs) from moving onto decentralized rails.
 
-Obolus implements a unique **3-Layer Privacy-Preserving Stack**:
+Obolus's mission is to close this gap by providing an **Institutional Privacy Layer** for RWA yield and credit, ensuring that your net worth remains your own business.
 
-1.  **Layer 1: Client-Side ECIES Encryption** - User intents (deposits/withdrawals) are sealed on the client before being sent to the server.
-2.  **Layer 2: Blinded Server (Dumb Store)** - The backend server stores only encrypted payloads and provides them to the decentralized settlement layer on-demand.
-3.  **Layer 3: TEE-Enforced Clearing** - Settlement calculations happen inside **Chainlink Confidential Runtime Environments (CRE)** using Intel SGX, ensuring that plaintext valuations only exist within secure hardware.
+## The Problem: The "Visibility Trap"
 
-### Key Features
+DeFi currently forces users into a trade-off:
+- **Public Exposure:** Using Ethereum or BSC exposes your entire wallet valuation and history to anyone with an explorer.
+- **Front-Running:** Large asset moves or institutional loans are visible on-chain before they settle, allowing competitors and bots to exploit the data.
+- **Compliance Risk:** Traditional institutions cannot legally expose customer portfolio data on public ledgers, creating a massive barrier to RWA adoption.
 
-- **Blinded Yield Vaults:** Deploy capital into RWA-backed strategies without revealing your net worth.
-- **Privacy-Preserving Lending:** Borrow against yield-generating assets with shielded collateral ratios.
-- **T+0 Settlement:** Immediate clearing and settlement via decentralized CRE workers.
-- **Institutional Compliance:** Multi-layered security designed for high-throughput institutional use cases.
+## The Solution: Obolus Privacy Stack
+
+Obolus implements a unique **3-Layer Privacy-Preserving Stack** to bridge this gap:
+
+1.  **Layer 1: Client-Side Sealing (ECIES)** - All transition data and asset amounts are sealed on the client using **secp256k1** encryption before ever touching a server or a network node.
+2.  **Layer 2: Blinded Server (Dumb Store)** - Our backend server stores only encrypted payloads. It never sees your plaintext balances, ensuring a "Server-Blind" architecture.
+3.  **Layer 3: TEE-Enforced Clearing (Chainlink CRE)** - Settlement logic and plaintext values only exist inside **Trusted Execution Environments (TEEs)** like Intel SGX. Chainlink CRE workers pull your encrypted intents, decrypt them inside a secure enclave, and push only the required settlement to the BNB Chain.
+
+## Key Protocol Modules
+
+Explore how we bring privacy to these core financial products:
+
+- **Blinded Yield Vaults:** Deploy capital into institutional RWA strategies with shielded valuations.
+- **Confidential Lending:** Borrow stablecoins against yield-generating assets with private collateral ratios.
+- **Hybrid AMM & Swap:** Trade tokenized equity intents without exposing slippage or trade sizes to the public mempool.
 
 ---
 
-Explore the sidebar to dive deep into our **Dumb Store Architecture** and **CRE settlement** workflows.
+### Ready to dive in?
+- **[Smart Contract Deployments](/docs/getting-started/deployments):** See our active addresses on BSC Testnet.
+- **[Architecture Deep Dive](/docs/architecture):** Learn how we maintain blindness at every layer.

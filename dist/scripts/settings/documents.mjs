@@ -1,20 +1,15 @@
 export const Documents = [
     {
         title: "Introduction",
-        href: "/",
+        href: "",
     },
     {
         title: "Getting Started",
         href: "/getting-started",
-        heading: "Fundamentals",
         items: [
             {
-                title: "Overview",
-                href: "/",
-            },
-            {
-                title: "Installation & Video",
-                href: "/installation",
+                title: "Deployments",
+                href: "/deployments",
             },
         ],
     },
@@ -22,17 +17,20 @@ export const Documents = [
         spacer: true,
     },
     {
-        title: "Agent Skills",
-        href: "/agent-skills",
-        heading: "AI Development",
+        title: "Privacy Architecture",
+        href: "/architecture",
         items: [
             {
-                title: "What are Agent Skills?",
-                href: "/",
+                title: "Dumb Store Model",
+                href: "/dumb-store",
             },
             {
-                title: "Quick Start Setup",
-                href: "/quick-start",
+                title: "Chainlink CRE & TEE",
+                href: "/cre-tee",
+            },
+            {
+                title: "ECIES Encryption",
+                href: "/encryption",
             },
         ],
     },
@@ -40,20 +38,37 @@ export const Documents = [
         spacer: true,
     },
     {
-        title: "Starters & Templates",
-        href: "/starters",
-        heading: "Starters",
+        title: "Protocol Modules",
+        href: "/modules",
+        items: [
+            {
+                title: "Smart Vaults",
+                href: "/vaults",
+            },
+            {
+                title: "AMM & Swap",
+                href: "/amm",
+            },
+            {
+                title: "Lending Market",
+                href: "/lending",
+            },
+        ],
     },
     {
         spacer: true,
     },
     {
-        title: "Community",
-        href: "/community",
+        title: "Developers",
+        href: "/developers",
         items: [
             {
-                title: "Contributing",
-                href: "/contributing",
+                title: "API Reference",
+                href: "/api",
+            },
+            {
+                title: "Settler Integration",
+                href: "/settler",
             },
         ],
     },

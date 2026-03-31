@@ -6,6 +6,16 @@ export const Documents: Paths[] = [
     href: "",
   },
   {
+    title: "Getting Started",
+    href: "/getting-started",
+    items: [
+      {
+        title: "Deployments",
+        href: "/deployments",
+      },
+    ],
+  },
+  {
     spacer: true,
   },
   {
